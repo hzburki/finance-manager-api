@@ -19,7 +19,7 @@ Bun.env.NODE_ENV === 'production' && app.use(rateLimit())
 app.use(swagger())
 
 /**
- * Routes
+ * Route Plugins
  */
 app.use(authRoutes)
 
