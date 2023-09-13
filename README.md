@@ -1,4 +1,4 @@
-# Elysia with Bun runtime
+# Finance Manager API
 
 # Install Bun
 You only have to run this command once :D 
