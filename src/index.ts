@@ -1,6 +1,32 @@
 import { Elysia } from "elysia";
+import cors from "@elysiajs/cors";
+import swagger from "@elysiajs/swagger";
+import { rateLimit } from "elysia-rate-limit";
 
-const app = new Elysia().get("/", () => "Hello Elysia").listen(3000);
+/**
+ * Import Routes
+ */
+import { authRoutes } from "./routes";
+
+const app = new Elysia()
+
+/**
+ * Midlewares
+ */
+app.use(cors())
+// only run rate limiter in production
+Bun.env.NODE_ENV === 'production' && app.use(rateLimit())
+app.use(swagger())
+
+/**
+ * Routes
+ */
+app.use(authRoutes)
+
+// Index route
+app.get('/', () => 'Hello World!')
+
+app.listen(Bun.env.PORT || 3000);
 
 console.log(
   `🦊 Elysia is running at ${app.server?.hostname}:${app.server?.port}`
