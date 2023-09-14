@@ -3,14 +3,14 @@ import { connect } from "@planetscale/database";
 import { drizzle } from "drizzle-orm/planetscale-serverless";
 
 // create the connection
-const connection = connect({
-  host: Bun.env["DATABASE_HOST"],
-  username: Bun.env["DATABASE_USERNAME"],
-  password: Bun.env["DATABASE_PASSWORD"],
-});
+const db = drizzle(connect({
+  host: process.env.DATABASE_HOST,
+  username: process.env.DATABASE_USERNAME,
+  password: process.env.DATABASE_PASSWORD,
+}));
 
 /**
  * Injecting the database as a decorator into Elysia Plugin. We will add 
  * this plugin to our main Elysia app.
  */
-export default new Elysia().decorate('db', () => drizzle(connection))
+export default new Elysia().decorate('db', () => db);

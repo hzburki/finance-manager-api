@@ -3,7 +3,8 @@
   "version": "1.0.50",
   "scripts": {
     "dev": "bun run --watch src/index.ts",
-    "schema": "drizzle-kit generate:mysql --config=./src/config/migrations.config.ts"
+    "schema": "drizzle-kit generate:mysql --config=./src/config/migrations.config.ts",
+    "migrate": "drizzle-kit push:mysql --config=./src/config/migrations.config.ts"
   },
   "dependencies": {
     "@elysiajs/cors": "^0.6.0",
