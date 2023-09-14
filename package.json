@@ -2,18 +2,20 @@
   "name": "finance-manager-api",
   "version": "1.0.50",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "bun run --watch src/index.ts"
+    "dev": "bun run --watch src/index.ts",
+    "schema": "drizzle-kit generate:mysql --config=./src/config/migrations.config.ts"
   },
   "dependencies": {
     "@elysiajs/cors": "^0.6.0",
     "@elysiajs/swagger": "^0.6.2",
+    "@planetscale/database": "^1.11.0",
+    "drizzle-orm": "^0.28.6",
     "elysia": "latest",
-    "elysia-group-router": "^1.0.1",
     "elysia-rate-limit": "^1.0.3"
   },
   "devDependencies": {
-    "bun-types": "latest"
+    "bun-types": "latest",
+    "drizzle-kit": "^0.19.13"
   },
   "module": "src/index.js"
 }
