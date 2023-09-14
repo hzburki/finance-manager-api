@@ -21,9 +21,10 @@ npm install -g @bun
 
 - [x] Setup Basic Routes
   - [x] Divide routes into Auth and put them in a separate folder
-- [ ] Database Initialization
-  - [ ] Setup database on local with docker
-  - [ ] Connec to database using Drizzle ORM
+- [x] Database Initialization
+  - [x] Setup database on planeetscale and connect to drizzle on local
+  - [x] Connect to database using Drizzle ORM, create and run migrations
+  - [ ] Test with a simple get request
 - [ ] Create login with JWT
   - [ ] Create a user model
   - [ ] Create a user controller

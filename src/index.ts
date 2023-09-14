@@ -4,7 +4,7 @@ import swagger from "@elysiajs/swagger";
 import { rateLimit } from "elysia-rate-limit";
 
 /** Import Local Plugin */
-import databasePlugin from "./config/database.config";
+import { db } from "./config/database.config";
 
 /** Import Routes */
 import { authRoutes } from "./routes";
@@ -18,13 +18,15 @@ process.env.NODE_ENV === 'production' && app.use(rateLimit())
 app.use(swagger())
 
 /** Injecting Plugins */
-app.use(databasePlugin)
+app.decorate('db', () => db)
 
 /** Route Plugins */
 app.use(authRoutes)
 
 /** Index route */
-app.get('/', () => 'Hello World!')
+app.get('/', () => {
+  return db.query.users.findMany();
+})
 
 /** Start the server */
 app.listen(process.env.PORT || 3000, ({ hostname, port }) => {
