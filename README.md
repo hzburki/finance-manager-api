@@ -24,7 +24,7 @@ npm install -g @bun
 - [x] Database Initialization
   - [x] Setup database on planeetscale and connect to drizzle on local
   - [x] Connect to database using Drizzle ORM, create and run migrations
-  - [ ] Test with a simple get request
+  - [x] Test with a simple get request
 - [ ] Create login with JWT
   - [ ] Create a user model
   - [ ] Create a user controller
