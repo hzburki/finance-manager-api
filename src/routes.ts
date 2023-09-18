@@ -1,9 +1,12 @@
 import Elysia from "elysia";
 
+/** Import Local Plugin */
+// import databaseConfig from "./config/database.config";
+
 const authRoutes = new Elysia({ prefix: '/auth' })
-  .get('/login', (context) => {
-    return JSON.stringify(context.params, null, 2)
-  })
-  .get('/register', (context) => "Hello from register route")
+  // .use(databaseConfig)
+  .get('/login', async () => {
+    return 'login'
+  });
 
 export { authRoutes }

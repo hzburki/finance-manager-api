@@ -3,11 +3,9 @@ import cors from "@elysiajs/cors";
 import swagger from "@elysiajs/swagger";
 import { rateLimit } from "elysia-rate-limit";
 
-/** Import Local Plugin */
-import { db } from "./config/database.config";
-
 /** Import Routes */
 import { authRoutes } from "./routes";
+import databaseConfig from "./config/database.config";
 
 const app = new Elysia()
 
@@ -16,16 +14,14 @@ app.use(cors())
 // only run rate limiter in production
 process.env.NODE_ENV === 'production' && app.use(rateLimit())
 app.use(swagger())
-
-/** Injecting Plugins */
-app.decorate('db', () => db)
+app.use(databaseConfig)
 
 /** Route Plugins */
 app.use(authRoutes)
 
 /** Index route */
-app.get('/', () => {
-  return db.query.users.findMany();
+app.get('/', ({ db }) => {
+  return "Hello World"
 })
 
 /** Start the server */
