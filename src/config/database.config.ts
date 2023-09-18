@@ -15,7 +15,8 @@ const connection = connect({
 // set logger on develop and local
 const logger = process.env.NODE_ENV !== "production" ? true : false
 
+const db = drizzle(connection, { schema, logger })
 const databaseConfig = new Elysia()
-  .decorate('db', drizzle(connection, { schema, logger }))
+  .decorate('db', () => db)
 
 export default databaseConfig

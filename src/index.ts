@@ -14,14 +14,14 @@ app.use(cors())
 // only run rate limiter in production
 process.env.NODE_ENV === 'production' && app.use(rateLimit())
 app.use(swagger())
-app.use(databaseConfig)
 
-/** Route Plugins */
-app.use(authRoutes)
-
-/** Index route */
-app.get('/', ({ db }) => {
-  return "Hello World"
+/** Injecting Plugins */
+app
+  .use(databaseConfig)
+  .use(authRoutes)
+  .get('/', async ({ db }) => {
+    const users = await db().query.users.findMany()
+    return users
 })
 
 /** Start the server */
