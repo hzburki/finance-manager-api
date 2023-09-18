@@ -1,8 +1,8 @@
 import Elysia, { t } from "elysia";
 
 /** Custom Imports */
-import { hashPassword, verifyPassword } from "./utils/auth.utils";
 import databaseConfig from "./config/database.config";
+import { hashPassword, verifyPassword } from "./utils/auth.utils";
 
 /** Importing Schema */
 import Schema from "./schema"
@@ -21,7 +21,10 @@ const authRoutes = new Elysia({ prefix: '/auth' })
     /** Check for duplicate emails and return error message */
     const emailExists = await db().query.users.findFirst({
       columns: { id: true },
-      where: (users, { eq }) => eq(users.email, email)
+      where: (users, { and, eq, isNull }) => and(
+        eq(users.email, email),
+        isNull(users.deletedAt)
+      )
     });
 
     if (emailExists) { 
@@ -63,9 +66,10 @@ const authRoutes = new Elysia({ prefix: '/auth' })
           status: true,
           password: true,
         },
-        where: (users, { and, eq }) => and(
+        where: (users, { and, eq, isNull }) => and(
           eq(users.email, email),
-          eq(users.status, 'active')
+          eq(users.status, 'active'),
+          isNull(users.deletedAt)
         )
       })
 
