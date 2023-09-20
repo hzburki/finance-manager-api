@@ -16,7 +16,8 @@ const connection = connect({
 const logger = process.env.NODE_ENV !== "production" ? true : false
 
 const db = drizzle(connection, { schema, logger })
-const databaseConfig = new Elysia()
+const databaseConfig = new Elysia({ name: "databaseConfig" })
   .decorate('db', () => db)
 
+export type dbType = typeof db
 export default databaseConfig

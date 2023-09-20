@@ -15,7 +15,8 @@ const authRoutes = new Elysia({ prefix: '/auth' })
    * Register User with Email and Password
    * ========================================
    */
-  .post('/register', async ({ set, body, db }) => {
+  .post('/register', async (context) => {
+    const { set, body, db } = context
     const { email, password } = body
 
     /** Check for duplicate emails and return error message */

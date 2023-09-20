@@ -7,3 +7,8 @@ export const verifyPassword = async (password: string, hash: string): Promise<bo
   const isMatch = await Bun.password.verify(password, hash);
   return isMatch;
 }
+
+// Todo: complete this
+export const verifyToken = async (token: string): Promise<boolean> => {
+  return true;
+}
