@@ -19,5 +19,5 @@ const db = drizzle(connection, { schema, logger })
 const databaseConfig = new Elysia({ name: "databaseConfig" })
   .decorate('db', () => db)
 
-export type dbType = typeof db
 export default databaseConfig
+export type dbType = typeof db

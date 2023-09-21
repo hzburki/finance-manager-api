@@ -1,4 +1,4 @@
-import Elysia, { t } from "elysia";
+import Elysia from "elysia";
 
 /** Custom Imports */
 import databaseConfig from "../../config/database.config";
@@ -13,5 +13,4 @@ const authRoutes = new Elysia({ prefix: '/auth' })
   /** Register User with Email and Password */
   .post('/register', registerWithEmailAndPassword, registerWithEmailAndPasswordDTO)
 
-export type authRoutesType = typeof authRoutes
 export { authRoutes }

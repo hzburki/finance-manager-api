@@ -3,19 +3,17 @@ import { type Context } from "elysia"
 
 import Schema from "../../schema"
 import { hashPassword } from "../../utils/auth.utils"
+import { dbType } from "../../config/database.config"
 
 /** Destructuring Schema */
 const { users } = Schema
 
-// import { dbType } from "../../config/database.config"
-// type registerType = Context & dbType & {
-//   body: {
-//     email: string
-//     password: string
-//   }
-// }
+type RegisterWithEmailAndPasswordContext = Context & {
+  db: () => dbType,
+  body: { email: string, password: string }
+}
 
-export const registerWithEmailAndPassword = async (context: Context): Promise<string>  => {
+export async function registerWithEmailAndPassword(context: RegisterWithEmailAndPasswordContext): Promise<string> {
   const { set, body: { email, password }, db } = context
 
   /** Check for duplicate emails and return error message */
